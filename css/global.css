@@ -1,5 +1,5 @@
 html {
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 	vertical-align: baseline;
 }
 
@@ -51,6 +51,13 @@ width: 910px;
     padding: 9px;
 }
 
+.social-instagram {
+    background: url("../img/instagram.png") no-repeat scroll 3px 3px #222222;
+    float: left;
+    height: 38px;
+    width: 38px;
+}
+
 .social-facebook {
     background: url("../img/facebook.png") no-repeat scroll 3px 3px #222222;
     float: left;
@@ -86,6 +93,9 @@ width: 910px;
     float: left;
     height: 38px;
     width: 38px;
+}
+.social-instagram:hover{
+	background-color: #905844;
 }
 .social-facebook:hover {
     background-color: #3B5998;
