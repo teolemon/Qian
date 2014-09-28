@@ -22,7 +22,7 @@ transitionOutEasing: 'easeInOutExpo'
 // animationSpeed :600,
 // tabs :".tab",
 // tabActiveClass :'active',
-// 
+//
 });
 
 // Hover menu effect
@@ -46,29 +46,29 @@ $logo.fadeIn('slow');
 // Hide logo
 $('.tab-profile').click(function() {
 $logo.fadeOut('slow');
-}); 
+});
 
 //--------------------------------- Hover animation for the elements of the portfolio --------------------------------//
-	
-	$('.thumbnail').hover( function(){ 
-		$(this).children('img').animate({ opacity: 0.55 }, 'fast');
-	}, function(){ 
-		$(this).children('img').animate({ opacity: 1 }, 'slow'); 
-	}); 
 
-// Fancy Box 
+	$('.thumbnail').hover( function(){
+		$(this).children('img').animate({ opacity: 0.55 }, 'fast');
+	}, function(){
+		$(this).children('img').animate({ opacity: 1 }, 'slow');
+	});
+
+// Fancy Box
 
 /*
  *  Simple image gallery. Uses default settings
  */
 
 $('.fancybox').fancybox({
-	
+
 	nextEffect : 'fade',
 	prevEffect :  'fade',
 	nextEasing : 'easeOutBack',
 	prevEasing : 'easeInBack',
-	
+
 	helpers: {
 				title : {
 					type : 'outside'
@@ -78,11 +78,7 @@ $('.fancybox').fancybox({
 					opacity : 0.95
 				}
 			}
-	
-}); 
 
-
-
-
+});
 
 });

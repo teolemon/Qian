@@ -1,0 +1,133 @@
+body {
+	background-image:url(../img/bg.jpg);
+}
+#containerIndex{
+	background-image:url(../img/bg.jpg);
+}
+#containerDashboard{
+	background-image:url(../img/dashboard/interfaceBG.png);
+}
+.menubar{
+margin:0 auto;
+width: 640px;
+height: 100px;
+list-style: none;
+margin-top: -10px;
+padding:10px;
+}
+.menubutton{
+float:left;
+margin-left:30px;
+margin-top:17px;
+}
+.spreadpielogo{
+margin:0 auto;
+width: 510px;
+margin-top:-8px;
+}
+.notAvailableLogo{
+margin:0 auto;
+width: 380px;
+margin-top:-8px;
+}
+.content{
+margin:0 auto;
+width: 1020px;
+}
+.bakeSection{
+float:left;
+margin:0 auto;
+margin-top:-10px;
+margin-bottom:30px;
+width: 420px;
+padding: 30px;
+
+}
+.slideSection{
+float:left;
+margin:0 auto;
+margin-top:0px;
+margin-bottom:30px;
+width: 460px;
+padding: 20px;
+}
+.marketPlace{
+margin:40px auto;
+}
+.marketPlaceTitleBar{
+margin:20px auto;
+padding: 30px;
+}
+.infographicEx{
+width: 600px;
+height: 360px;
+list-style: none;
+float:left;
+}
+.infographicIcon{
+width: 180px;
+float:left;
+margin-left:10px;
+margin-top:10px;
+}
+.signupSection{
+width: 320px;
+float:left;
+}
+h2{
+padding:5px;
+}
+.draggable { 
+	width:150px;
+	height:150px;
+	#background: #CCC;
+	padding: 0.5em; 
+	cursor: move;
+	border: solid green 0px;
+}
+
+#page {
+	width: 1062px;
+	height: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#slide {
+	width: 700px;
+	height: 800px;
+	background-image: url(../img/dashboard/bgdashboard.gif);
+	float: left;
+}
+
+#selector {
+	width: 350px;
+	height: 800px;
+	background-image: url(../img/dashboard/bgdashboard2.gif);
+	margin-left: 710px;
+	margin-top:10px;
+}
+.toolboxTitle{
+padding:21px;
+}
+
+#accordion {
+	margin-top:20px;
+	width: 335px;
+	background:transparent;
+}
+#footer{
+width:960px;
+margin:0 auto;
+padding:30px;
+}
+.footernote{
+width:520px;
+margin:0 auto;
+font-weight:bold;
+}
+.footerLogos{
+width:535px;
+margin:0 auto;
+margin-bottom:20px;
+}

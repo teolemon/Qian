@@ -1,0 +1,366 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+		<title>Spread Pie Bakery</title>
+		<link type="text/css" href="css/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.8.18.custom.min.js"></script>
+		
+		<link href="css/bootstrap.css" rel="stylesheet">
+		<link href="css/bootstrap-responsive.css" rel="stylesheet">
+		<link href="css/global.css" rel="stylesheet">
+		
+
+		
+		<!--<script type="text/javascript"
+        src='https://www.google.com/jsapi?autoload={"modules":[{"name":"visualization","version":"1"}]}'>
+		</script>-->
+		
+		<script type="text/javascript">
+			var kpi_list = new Array();
+			var current_id_in_configuration;
+			var last_id;
+			
+			$(document).ready(function() {
+			
+			});
+		
+			$(function(){
+				$( "#accordion" ).accordion({
+					autoHeight: false,
+					navigation: true
+				});
+				
+				// Dialog			
+				$('#dialog-form').dialog({
+					hide: { effect: 'drop', direction: "down" },
+					modal: true,
+					show: { effect: 'drop', direction: "up" },
+					closeOnEscape: true,
+					draggable: false,
+					autoOpen: false,
+					width: 600,
+					buttons: {
+						"Delete": function() {
+							//window.confirm('Do you really want to delete this chart ?');
+							$("#" + current_id_in_configuration).remove();
+							$(this).dialog("close");
+						},
+						"Set": function() {
+							
+							for (i=0; i<kpi_list.length; i++){
+								
+								if ( kpi_list[i]["id"] == last_id ) {
+									
+									switch( kpi_list[i]["type"] ) {
+									case 'logo':
+										$('#' + kpi_list[i]["id"] ).css("background-image", 'url(img/template/logo.php?width=230&height=120&titre=' + $("input").val() + ')');
+										break;
+										
+									case 'square':
+										$('#' + kpi_list[i]["id"] ).css("background-image", 'url(img/template/square-2.php?width=231&height=142&titre=' + $("input").val() + ')');
+										break;
+									
+									case 'square-2':
+										$('#' + kpi_list[i]["id"] ).css("background-image", 'url(img/template/square.php?width=231&height=78&titre=' + $("input").val() + ')');
+										break;
+									
+									case 'databubble1':
+										$('#' + kpi_list[i]["id"] ).css("background-image", 'url(img/template/databubble.php?width=155&height=157&titre=' + $("input").val() + ')');
+										break;
+										
+									case 'databubble2':
+										var framecontent = document.getElementById("id_iframe").contentDocument.body.innerHTML;
+										$('#' + kpi_list[i]["id"] ).css("background-image", 'url(img/template/databubble2.php?width=155&height=157&titre=' + framecontent + ')');
+										break;
+									
+									default:
+										break;
+									}
+								}
+							}
+
+							$( this ).dialog( "close" );
+							
+						}
+					}
+				});
+			
+				
+			});
+			
+			//Load the configuration window
+			function configure(id) {
+				last_id = id;
+				
+				current_id_in_configuration = id;
+				
+				$('#dialog-form').empty();
+				
+				for (i=0; i<kpi_list.length; i++){
+					
+					if ( kpi_list[i]["id"] == id ) {
+						
+						switch( kpi_list[i]["type"] ) {
+							case 'logo':
+								$('#dialog-form').append("Name : <input type=\"text\" name=\"VALUE\" />");
+								break;
+							case 'square':
+								$('#dialog-form').append("Text : <input type=\"text\" name=\"VALUE\" />");
+								break;
+							case 'square-2':
+								$('#dialog-form').append("Value : <input type=\"text\" name=\"VALUE\" />");
+								break;
+							case 'databubble1':
+								$('#dialog-form').append("Value : <input type=\"text\" name=\"VALUE\" />");
+								break;
+							case 'databubble2':
+								$('#dialog-form').append("<iframe id=\"id_iframe\" src=\"dialog.php\"></iframe><!--Value : <input type=\"text\" name=\"VALUE\" />-->");
+								break;							
+							case 'bonhomme':
+								$('#dialog-form').append("Percentage : <input type=\"text\" name=\"VALUE\" />%");
+								break;
+							default:
+								Alert('Error');
+								break;
+						}
+						
+					}
+				} 
+				
+				//$('#dialog-form').append('Configure ' + id);
+				
+				//alert(document.getElementById(current_id_in_configuration).className);
+				
+				//alert($(this).hasClass('draggable'));
+			
+				$('#dialog-form').dialog('open'); 
+			}
+			
+			//Add a new block
+			/*
+			function addNewKPI() {
+				alert(1);
+				var timestamp = new Date().getTime()
+				var slide_obj = $("#slide").position();
+				
+				var tmpObj_KPI = new Object();
+				tmpObj_KPI["top"] = slide_obj.top + 1;
+				tmpObj_KPI["left"] = slide_obj.left + 1;
+				tmpObj_KPI["id"] = "draggable_" + timestamp;
+				
+				$('#slide').append('<div id="' + tmpObj_KPI["id"] + '" class="draggable" ondblclick="configure(\'' + tmpObj_KPI["id"] + '\');">' + tmpObj_KPI["id"] + '</p>');
+				
+				$('#' + tmpObj_KPI["id"] ).draggable({ grid: [ 15, 15 ], containment: "parent" });
+				$('#' + tmpObj_KPI["id"] ).offset({ top: tmpObj_KPI["top"], left: tmpObj_KPI["left"] });
+				//$('#' + tmpObj_KPI["id"] ).resizable({containment: "#slide", aspectRatio: 1/1});
+				
+				kpi_list.push( tmpObj_KPI );
+				
+			}
+			*/
+			
+			//Add a new bubble
+			function addGadget(imageUrl, gadgetType, width, height) {
+			
+				var timestamp = new Date().getTime()
+				var slide_obj = $("#slide").position();
+				
+				var tmpObj_KPI = new Object();
+				tmpObj_KPI["top"] = slide_obj.top + 1;
+				tmpObj_KPI["left"] = slide_obj.left + 1;
+				tmpObj_KPI["id"] = "draggable_" + timestamp;
+				tmpObj_KPI["type"] = gadgetType;
+				
+				$('#slide').append('<div style="width: ' + width + 'px; height: '+ height + 'px;" id="' + tmpObj_KPI["id"] + '" class="draggable '+ gadgetType +'" ondblclick="configure(\'' + tmpObj_KPI["id"] + '\');"></p>');
+				
+				$('#' + tmpObj_KPI["id"] ).css("background-image", imageUrl);			
+				$('#' + tmpObj_KPI["id"] ).css("background-repeat", "no-repeat");		
+				$('#' + tmpObj_KPI["id"] ).draggable({ grid: [ 15, 15 ], containment: "parent" });
+				$('#' + tmpObj_KPI["id"] ).offset({ top: tmpObj_KPI["top"], left: tmpObj_KPI["left"] });
+				//$('#' + tmpObj_KPI["id"] ).resizable({containment: "#slide"});
+				
+				kpi_list.push( tmpObj_KPI );
+				
+			}
+			
+			// Add a new pie chart
+			function addNewPie() {
+				var timestamp = new Date().getTime()
+				var slide_obj = $("#slide").position();
+				
+				var tmpObj_KPI = new Object();
+				tmpObj_KPI["top"] = slide_obj.top + 1;
+				tmpObj_KPI["left"] = slide_obj.left + 1;
+				tmpObj_KPI["id"] = "draggable_" + timestamp;
+				
+				$('#slide').append('<div id="' + tmpObj_KPI["id"] + '" class="draggable" ondblclick="configure(\'' + tmpObj_KPI["id"] + '\');">' + tmpObj_KPI["id"] + '</p>');
+				
+				kpi_list.push( tmpObj_KPI );
+				
+				var wrap = new google.visualization.ChartWrapper();
+				wrap.setChartType('PieChart');
+				wrap.setDataSourceUrl('http://spreadsheets.google.com/tq?key=pCQbetd-CptGXxxQIG7VFIQ&pub=1');
+				//wrap.setDataSourceUrl('');
+				wrap.setContainerId(tmpObj_KPI["id"]);
+				wrap.setQuery('SELECT A,D WHERE D > 100 ORDER BY D');
+				wrap.setOptions({
+					'title':'Test', 
+					'legend':'none',
+					'width':'300',
+					'height':'200',
+					'backgroundColor.fill':'transparent'
+				});
+
+				wrap.draw();
+				
+				$('#' + tmpObj_KPI["id"] ).draggable({ grid: [ 15, 15 ], containment: "parent" });
+				$('#' + tmpObj_KPI["id"] ).offset({ top: tmpObj_KPI["top"], left: tmpObj_KPI["left"] });
+				//$('#' + tmpObj_KPI["id"] ).resizable({containment: "#slide"});
+			}
+			
+			//Add a new histogram
+			function addNewHistogram() {
+				var timestamp = new Date().getTime()
+				var slide_obj = $("#slide").position();
+				
+				var tmpObj_KPI = new Object();
+				tmpObj_KPI["top"] = slide_obj.top + 1;
+				tmpObj_KPI["left"] = slide_obj.left + 1;
+				tmpObj_KPI["id"] = "draggable_" + timestamp;
+				
+				$('#slide').append('<div id="' + tmpObj_KPI["id"] + '" class="draggable" ondblclick="configure(\'' + tmpObj_KPI["id"] + '\');">' + tmpObj_KPI["id"] + '</p>');
+				
+				$('#' + tmpObj_KPI["id"] ).draggable({ grid: [ 15, 15 ], containment: "parent" });
+				$('#' + tmpObj_KPI["id"] ).offset({ top: tmpObj_KPI["top"], left: tmpObj_KPI["left"] });
+				//$('#' + tmpObj_KPI["id"] ).resizable({containment: "#slide", aspectRatio: 1/1});
+				
+				kpi_list.push( tmpObj_KPI );
+				
+				var wrap = new google.visualization.ChartWrapper();
+				wrap.setChartType('ColumnChart');
+				wrap.setDataSourceUrl('http://spreadsheets.google.com/tq?key=pCQbetd-CptGXxxQIG7VFIQ&pub=1');
+				//wrap.setDataSourceUrl('');
+				wrap.setContainerId(tmpObj_KPI["id"]);
+				wrap.setQuery('SELECT A,D WHERE D > 100 ORDER BY D');
+				wrap.setOptions({
+				'title':'Test', 
+				'legend':'none',
+				'width':'200',
+				'height':'120'
+				});
+
+				wrap.draw();
+			}
+			
+			function savePositions() {
+				
+			}
+		</script>
+
+	</head>
+	<body>
+	<div id="containerDashboard">
+		<div id="dialog-form" title="Set data value" style="background:#ffffff !important;">
+			<form>
+			<fieldset>
+				<label for="data">Data value for Bubble</label>
+				<input type="text" name="databubble" id="databubble" class="text ui-widget-content ui-corner-all" />
+				
+			</fieldset>
+			</form>
+		</div>
+	
+		<div id="page">
+		
+			<div class="menubar">
+			<!--<span class="menubutton"><a href="#"><img src="img/homeButton.png" /></a></span>
+			<span class="menubutton"><a href="#"><img src="img/aboutButton.png" /></a></span>
+			<span class="menuribbon"><a href="#"><img src="img/ribbon_bake.png" /></a></span>
+			<span class="menubutton"><a href="#"><img src="img/marketplace.png" /></a></span>
+			<span class="menubutton"><a href="#"><img src="img/blogButton.png" /></a></span>-->
+			<ul class="menubar">
+				<li class="menubutton"><a href="index.html"><img src="img/homeButton.png" /></a></li>
+				<li class="menubutton"><a href="404.html"><img src="img/aboutButton.png" /></a></li>
+				<li class="menubutton" style="margin-top:0px;"><a href="dashboard.html"><img src="img/ribbon_bake.png" /></a></li>
+				<li class="menubutton"><a href="404.html"><img src="img/marketplace.png" /></a></li>
+				<li class="menubutton"><a href="404.html"><img src="img/blogButton.png" /></a></li>
+			<ul>
+			</div>
+			
+		<div class="content">
+		
+			<div id="slide">
+			</div>			
+			<div id="selector">
+			
+				<div class="toolboxTitle"><img src="img/dashboard/bakerytoolbox.png" /></div>
+				<div><img style="cursor: pointer;margin-left:70px;" onClick="addGadget('url(img/template/logo.png)','logo', 230, 120);" src="img/dashboard/uploadlogo.png" /></div>
+				<div id="accordion">
+					
+					<h3><img src="img/dashboard/textboxtool.png" /></h3>
+					<div>
+						<!--<span class="btn btn-success" style="cursor: pointer;" onClick="addGadget('url(img/template/logo.png)','logo', 230, 120);">Add Logo</span>
+						-->
+						
+						<img style="cursor: pointer;" onClick="addGadget('url(img/template/square.png)','square',231,142);" src="img/dashboard/ele_textbox1.png" />
+						<img style="cursor: pointer;" onClick="addGadget('url(img/template/square-2.png)','square-2', 231,78);"src="img/dashboard/ele_textbox2.png" />
+						
+					</div>
+					<h3><img src="img/dashboard/databubbles.png" /></h3>
+					<div>
+						<img style="cursor: pointer;" onClick="addGadget('url(img/template/bubble1.png)','databubble1', 155,157);" src="img/dashboard/ele_bubble1.png" />
+						<img style="cursor: pointer;" onClick="addGadget('url(img/template/bubble2.png)','databubble2',155,157);" src="img/dashboard/ele_bubble2.png" >
+						
+						<!--<span class="btn btn-success" style="cursor: pointer;" onClick="addGadget('url(img/template/girl_brown.png)','bonhomme',19,48);">Add Girl Icon</span>
+						<span class="btn btn-success" style="cursor: pointer;" onClick="addGadget('url(img/template/man_brown.png)','bonhomme',19,48);">Add Boy Icon</span>
+						-->
+					</div>
+					<h3><img src="img/dashboard/piecharts.png" /></h3>
+					<div>  
+						<!-- <img src="img/items/item1.png" alt="" style="width:140px;" />
+						<img src="img/items/item2.png" alt="" style="width:140px;" />
+						<img src="img/items/item3.png" alt="" style="width:140px;" /> -->
+						<img style="cursor: pointer;" onClick="addGadget('url(img/template/girl_brown.png)','bonhomme',19,48);" src="img/dashboard/girl_brown.png" />
+						
+					</div>
+					<h3><img src="img/dashboard/histogram.png" /></h3>
+					<div>  
+						<img style="cursor: pointer;" onClick="addGadget('url(img/template/girl_brown.png)','bonhomme',19,48);" src="img/dashboard/man_brown.png" />
+					</div>
+					<h3><img src="img/dashboard/graph.png" /></h3>
+					<div>  
+						
+					</div>
+					
+				</div>
+			
+			</div>
+		</div>
+
+		</div>	
+		
+		<div id="footer">
+		<img src="img/footer_separator.png" />
+		<div class="footerLogos">
+		<img src="img/startupwekend_logo.png" />
+		<img src="img/dojoboost_logo.png" />
+		<img src="img/dojocrea_logo.png" />
+		<img src="img/rudebaguette_logo.png" />
+		</div>
+		<div class="footernote">Copyrights Reserved SpreadPie 2012 | 
+		<a href="index.html">Home</a> | 
+		<a href="404.html">About</a> | 
+		<a href="404.html">Marketplace</a> | 
+		<a href="404.html">Blog</a> |
+		<a href="mailto:spreadpie.swpa@gmail.com">Contact</a>
+		</div>
+	</div>
+	
+		<!-- ui-dialog -->
+		<div id="dialog" title="Chart Configuration" style="background:#ffffff !important;">
+		</div>
+	</div>
+	</body>
+</html>	

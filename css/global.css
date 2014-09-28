@@ -10,10 +10,10 @@ body {
 
 #wrapper{
 margin: 50px auto 0;
-width: 910px; 
+width: 910px;
 }
 #tab-container{
- 
+
 
 }
 #header {
@@ -118,7 +118,7 @@ width: 910px;
 }
 #content{
     background-color: #ffffff;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset; 
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset;
 }
 
 #profile {
@@ -131,7 +131,7 @@ width: 910px;
 #resume {
     overflow: hidden;
     padding: 20px;
-	
+
 }
 #work {
     overflow: hidden;
@@ -216,11 +216,11 @@ float:left;
 	margin:60px 0 0 15px;
 }
 
-.tab-container .panel-container { 
-border: solid #666 1px; 
-padding: 10px; 
--moz-border-radius: 0 4px 4px 4px; 
--webkit-border-radius: 0 4px 4px 4px; 
+.tab-container .panel-container {
+border: solid #666 1px;
+padding: 10px;
+-moz-border-radius: 0 4px 4px 4px;
+-webkit-border-radius: 0 4px 4px 4px;
 
 }
 
@@ -229,20 +229,20 @@ padding: 10px;
 	margin:0 0;
 }
 
-.tab { 
-display: inline-block; zoom:1; 
-*display:inline; 
-background: no; 
-border-bottom: none; 
--moz-border-radius: 4px 4px 0 0; 
--webkit-border-radius: 4px 4px 0 0; 
+.tab {
+display: inline-block; zoom:1;
+*display:inline;
+background: no;
+border-bottom: none;
+-moz-border-radius: 4px 4px 0 0;
+-webkit-border-radius: 4px 4px 0 0;
 
 }
 
-.tab a { 
-	line-height: 2em; 
-	padding: 45px 20px 12px 20px; 
-	outline: none; 
+.tab a {
+	line-height: 2em;
+	padding: 45px 20px 12px 20px;
+	outline: none;
     background-repeat: no-repeat;
     color: #333;
     display: block;
@@ -251,21 +251,21 @@ border-bottom: none;
     text-align: center;
     width: 48px;
 }
-.tab a:hover { 
+.tab a:hover {
 background-color: #ccc;
 color: #fff;
-font-weight: bold; 
+font-weight: bold;
 }
-.tab.active { 
-position: relative; 
-top: 1px; 
+.tab.active {
+position: relative;
+top: 1px;
 border-color: #666;
 border-top: 5px solid #C35151;
 /* box-shadow: 0 1px 6px rgba(0, 0, 0, 0.27), 0 0 40px rgba(0, 0, 0, 0.06) inset; */
 }
 
-.tab a.active { 
-font-weight: bold; 
+.tab a.active {
+font-weight: bold;
 background-color: #fff;
 color: #000;
 }
@@ -318,7 +318,7 @@ h3.main-heading span {
     padding-top: 10px;
 	list-style: none outside;
 	margin: 0;
-	
+
 }
 .timeline li{
 	margin-bottom: 20px;
@@ -375,7 +375,8 @@ h3.main-heading span {
     color: #444444;
     float: left;
     font-size: 15px;
-    width: 240px;
+    width: 100%;
+    margin-bottom: 3px;
 }
 
 .footer {
